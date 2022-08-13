@@ -39,3 +39,9 @@ for (i=1;i<=n;i++){
 
 	//Condicion si el alumno supera el 10.5 (Nota mínima)
 	if (notafinal >= 3.0)
+		{cout<<"\nEl alumno ha aprobado la materia.\n";
+		}
+	else
+		cout<<"\nEl alumno ha desaprobado la materia.\n";
+	}
+}
