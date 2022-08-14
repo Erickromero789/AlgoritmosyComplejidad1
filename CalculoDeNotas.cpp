@@ -14,6 +14,7 @@ int main()
   double nota1, nota2, nota3,notafinal,prom, i, n;
   int cnt1=0, cnt2=0;
   
+  
 cout<<"\n*********** Calculo De Notas ***********\n";
 cout<<"\nIngrese cantidad de alumnos a registrar: ";
 cin>>n;
@@ -38,18 +39,20 @@ for (i=1;i<=n;i++){
   nota3 = (nota3*0.2);
 
 	notafinal = nota1+nota2+nota3;
-  prom=notafinal/n;
-  //Condicion si el alumno supera el 10.5 (Nota mínima)
-	if (notafinal >= 3.0)
-		{
-      cnt1 ++;
-		}
-	else
-		cnt2 ++;
+  //Condicion si el alumno supera el 3.0 (Nota mínima)
+	if (notafinal > 2.9)
+	{
+      		cnt1 ++;
+      		cout<<"\nLa nota final es "<<notafinal<<"\n";
+      		cout<<"\nEl estudiante a aprobado el curso\n";
+      
+	}
+	else  
+      		cnt2 ++;
 }
-
-cout<<"\nAprobaron "<<cnt1<<" Estudiantes\n";
-cout<<"\nNo Aprobaron "<<cnt2<<" Estudiantes";
-cout<<"\nLa Nota Promedio es "<<prom;
+cout<<"\n+++++++++++++++++++++++++++++++++++++++\n";
+cout<<"\n+  Aprobaron "<<cnt1<<" Estudiantes\n";
+cout<<"\n+  No Aprobaron "<<cnt2<<" Estudiantes\n";
+//cout<<"\nListado de notas "<<notafinal;
   
 }
