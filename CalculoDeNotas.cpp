@@ -1,11 +1,22 @@
 #include <iostream>
+#include <string>
 using namespace std;
-  
+
+struct nodo{
+  string codigo;
+  struct nodo *sig;
+} *prim = NULL, *ultm, *nuevo;
+void entrarlista(string);
+void printlist();
+
 //Programa Principal
 int main()
 {
-  double nota1, nota2, nota3,notafinal,prom,suma = 0.0;
-  int cnt1=0, cnt2=0, n, i ;
+
+  float nota,notaf,suma = 0.0;
+  int cnt1=0, n, i ;
+  string cod;
+  
   
 do{
   cout<<"\n*********** Calculo De Notas ***********\n";
@@ -13,47 +24,74 @@ do{
   cin>>n;
 }while(n <= 0); 
 
-  for (int i = 1; i <= n; i++) {  // leemos el resto de notas desde el estudiante  2 hasta el estudiante n         
-      cout<<"\n*****Ingrese Notas del Estudiantes " << i << "***** \n";
+  for (int i = 0; i < n; i++) {  // leemos todas notas         
+      notaf = 0.0;
+      cout<<"\n*****Digite Codigo Del Estudiante Ejemplo (A001):  \n";
+      cin>>cod;
+      
+      cout<<"\n*****Ingrese Notas del Estudiante " << cod << "***** \n";  
       do{
         cout<<"\nIngrese Nota Parcial: ";
-	      cin>>nota1;
-      }while(nota1 < 0 || nota1 > 5.0);
-      nota1 = (nota1*0.5);
+	      cin>>nota;
+      }while(nota < 0 || nota > 5.0);
+      notaf += nota*0.5;
   
 	    do{
         cout<<"\nIngrese Nota Quices: ";
-	      cin>>nota2;
-      }while(nota2 < 0 || nota2 > 5.0);
-      nota2 = (nota2*0.3);
+	      cin>>nota;
+      }while(nota < 0 || nota > 5.0);
+      notaf += nota*0.3;
   
 	    do{
         cout<<"\nIngrese Nota Trabajos y Talleres: ";
-	      cin>>nota3;
-      }while(nota3 < 0 || nota3 > 5.0);
-      nota3 = (nota3*0.2);
+	      cin>>nota;
+      }while(nota < 0 || nota > 5.0);
+      notaf += nota*0.2;
 
-	    notafinal = nota1+nota2+nota3;
-      suma = suma + notafinal;
+      suma += notaf;
       //Condicion si el alumno supera el 3.0 (Nota mínima)
-	    if (notafinal >= 3.0)
+	    if (notaf >= 3.0 )
 		  {
         cnt1 ++;
-        cout<<"\n+ La nota final es "<<notafinal<<"\n";
+        cout<<"\n+ La nota final es "<<notaf<<"\n";
         cout<<"\n+ El estudiante a aprobado el curso\n";
       
-		  } else if (notafinal < 3.0){
-        cnt2 ++;
-        cout<<"\n+ La nota final es "<<notafinal<<"\n";
+		  } else if (notaf < 3.0){
+        cout<<"\n+ La nota final es "<<notaf<<"\n";
         cout<<"\n+ El estudiante a desaprobado el curso\n";
       } 
-    }  
- 
-  
-//Resultados
-cout<<"\n\n+++++++++++++++++++++++++++++++++++++++\n";
-cout<<"\n+  Aprobaron "<<cnt1<<" Estudiante(s)\n";
-cout<<"\n+  Desaprobaron "<<cnt2<<" Estudiante(s)\n";
-cout<<"\n+  La Nota Promedio Del Curso Es "<<suma/n; 
+    
+      if(notaf == 5.0){
+        entrarlista(cod);
+      }
+      
+    }
 
+  //Resultados
+  cout<<"\n\n+++++++++++++++++++++++++++++++++++++++\n";
+  cout<<"\n+  Aprobaron "<<cnt1<<" Estudiante(s)\n";
+  cout<<"\n+  Desaprobaron "<<n-cnt1<<" Estudiante(s)\n";
+  cout<<"\n+  La Nota Promedio Del Curso Es "<<suma/n<<"\n";
+  printlist();
+} 
+void entrarlista(string cod) {
+  nuevo = (struct nodo *) new (struct nodo);
+  nuevo -> codigo = cod;
+  if (prim == NULL)
+    prim = nuevo;
+  else
+    ultm -> sig = nuevo;
+    ultm = nuevo;
 }
+
+void printlist(){
+  struct nodo *p=prim;
+  cout<<"\n++ Lista De Estudiantes Que Sacaron (5,0) En La Nota Final ++\n";
+  while(p != NULL) {
+    cout<<"\n------------------------\n";
+    cout<<"+ "<< p->codigo << endl;
+    p = p->sig;
+  }
+  cout<<"\n";
+}
+
